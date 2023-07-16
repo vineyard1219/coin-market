@@ -7,9 +7,11 @@ const styles = {
   headerWrapper: `flex justify-center h-full max-w-screen-xl mx-auto px-4`,
   nav: `flex justify-center items-center gap-[20px]`,
   navItem: `relative mr-1 cursor-pointer hover:opacity-60`,
+  navLink: `text-white flex mx-[10px]`,
   badge: `rounded-full bg-blue-600 h-1 w-1 absolute bottom-5 right-0 top-1 ring-4`,
   inputContainer: `flex items-center justify-center p-2 rounded bg-[#171924]`,
   input: `bg-transparent outline-none text-white w-70 ml-3`,
+  navbtn: `py-2 px-3 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 mx-3`
 }
 
 const Header = () => {
@@ -63,6 +65,9 @@ const Header = () => {
 
         <div className='flex items-center'>
           {/* <ConnectButton /> */}
+          <div className={styles.navbtn}>
+            <div className={styles.navLink}>Button</div>
+          </div>
 
           <div className={styles.inputContainer}>
             <Search />
