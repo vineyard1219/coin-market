@@ -1,6 +1,16 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { CoinMarketProvider } from '@/context/context'
+import { AppProps } from 'next/app'
+
+function MyApp({ Component, pageProps }: AppProps) {
+  return (
+    <CoinMarketProvider>
+      <Component {...pageProps}/>
+    </CoinMarketProvider>
+  )
+}
 
 const inter = Inter({ subsets: ['latin'] })
 
