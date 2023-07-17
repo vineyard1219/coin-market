@@ -23,43 +23,43 @@ const Header = () => {
       width={220} //가로
       height={220} //세로
       />
-
+      
       <div className={styles.headerWrapper}>
         <nav className={styles.nav}>
           <div className={styles.navItem}>
-            <div className={styles.navLink}>Cryptocurrencies</div>
+            <div className={styles.navLink}>Home</div>
             <div className={styles.badge} />
           </div>
 
           <div className={styles.navItem}>
-            <div className={styles.navLink}>Exchanges</div>
+            <div className={styles.navLink}>Explorer</div>
           </div>
 
           <div className={styles.navItem}>
-            <div className={styles.navLink}>NFT</div>
+            <div className={styles.navLink}>Depp+Tocken</div>
             <div className={styles.badge} />
           </div>
 
           <div className={styles.navItem}>
-            <div className={styles.navLink}>Cryptown</div>
+            <div className={styles.navLink}>Pools</div>
             <div className={styles.badge} />
           </div>
 
           <div className={styles.navItem}>
-            <div className={styles.navLink}>Portfolio</div>
+            <div className={styles.navLink}>Catalyst</div>
           </div>
 
           <div className={styles.navItem}>
-            <div className={styles.navLink}>Watchlist</div>
+            <div className={styles.navLink}>Community</div>
           </div>
 
           <div className={styles.navItem}>
-            <div className={styles.navLink}>Products</div>
+            <div className={styles.navLink}>History</div>
             <div className={styles.badge} />
           </div>
 
           <div className={styles.navItem}>
-            <div className={styles.navLink}>Learn</div>
+            <div className={styles.navLink}>Dictionary</div>
           </div>
         </nav>
 
