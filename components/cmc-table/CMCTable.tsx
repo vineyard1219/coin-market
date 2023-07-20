@@ -1,18 +1,32 @@
 'use client'
 
-import React, { useContext, useEffect, useState, useCallback } from 'react'
+import React from 'react'
+import { useContext, useEffect, useState, useCallback } from 'react'
+import btc from '../../assets/btc.png'
 import { CoinMarketContext } from '../../context/context'
 import CMCTableHeader from './CMCTableHeader'
 import CMCTableRow from './CMCTableRow'
 
-interface ICoin {
-  cmc_rank: number
-  [key: string]: any
+interface CoinData {
+  cmc_rank: number,
+  name: string,
+  symbol: string,
+  quote: {
+    USD: {
+      percent_change_24h: number,
+      percent_change_7d: number,
+      price: number,
+      market_cap: number,
+      volume_24h: number,
+    }
+  },
+  total_supply: number,
+  circulating_supply: number,
 }
 
 const CMCTable: React.FC = () => {
-  const { getTopTenCoins } = useContext(CoinMarketContext)
-  const [coinData, setCoinData] = useState<ICoin[] | null>(null)
+  let { getTopTenCoins } = useContext(CoinMarketContext)
+  let [coinData, setCoinData] = useState<CoinData[] | null>(null)
 
   useEffect(() => {
     setData()
@@ -20,8 +34,8 @@ const CMCTable: React.FC = () => {
 
   const setData = useCallback(async () => {
     try {
-      const apiResponse: ICoin[] = await getTopTenCoins() // getTopTenCoins type is assumed to be correctly inferred
-      const filteredResponse: ICoin[] = []
+      let apiResponse = await getTopTenCoins()
+      let filteredResponse: CoinData[] = []
 
       for (let i = 0; i < apiResponse.length; i++) {
         const element = apiResponse[i]
@@ -39,25 +53,26 @@ const CMCTable: React.FC = () => {
       <div className='mx-auto max-w-screen-2xl'>
         <table className='w-full'>
           <CMCTableHeader />
-          <CMCTableRow />
-          {coinData && coinData.map((coin, index) => (
-            <CMCTableRow
-              key={index}
-              starNum={coin.cmc_rank}
-              coinName={coin.name}
-              coinSymbol={coin.symbol}
-              coinIcon={btc}
-              showBuy={true}
-              hRate={coin.quote.USD.percent_change_24h}
-              dRate={coin.quote.USD.percent_change_7d}
-              hRateIsIncrement={true}
-              price={coin.quote.USD.price}
-              marketCapValue={coin.quote.USD.market_cap}
-              volumeCryptoValue={coin.quote.USD.volume_24h}
-              volumeValue={coin.total_supply}
-              circulatingSupply={coin.circulating_supply}
-            />
-          ))}
+          <CMCTableRow starNum={0} coinName={''} coinIcon={undefined} />
+          {coinData && coinData.map((coin, index) => {
+            return (
+              <CMCTableRow
+                key={index}
+                starNum={coin.cmc_rank}
+                coinName={coin.name}
+                coinSymbol={coin.symbol}
+                coinIcon={btc}
+                hRate={coin.quote.USD.percent_change_24h}
+                dRate={coin.quote.USD.percent_change_7d}
+                hRateIsIncrement={true}
+                price={coin.quote.USD.price}
+                marketCapValue={coin.quote.USD.market_cap}
+                volumeCryptoValue={coin.quote.USD.volume_24h}
+                volumeValue={coin.total_supply}
+                circulatingSupply={coin.circulating_supply}
+              />
+            )
+          })}
         </table>
       </div>
     </div>

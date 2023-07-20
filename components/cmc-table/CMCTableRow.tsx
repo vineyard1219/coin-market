@@ -4,26 +4,42 @@ import More from '../../assets/svg/more'
 import Star from '../../assets/svg/star'
 import CoinNameRow from './CoinNameRow'
 import Rate from './Rate'
-// import { useRouter } from 'next/router'
+//import { useRouter } from 'next/router'
+
+interface CMCTableRowProps {
+  starNum: number,
+  coinName: string,
+  coinIcon: StaticImageData,
+  coinSymbol?: string,
+  price?: number,
+  hRate?: number,
+  dRate?: number,
+  hRateIsIncrement?: boolean,
+  dRateIsIncrement?: boolean,
+  marketCapValue?: number,
+  volumeValue?: number,
+  volumeCryptoValue?: number,
+  circulatingSupply?: number,
+}
 
 const styles = {
   tableRow: `text-white border-b border-gray-800 text-[0.93rem]`,
 }
 
-const CMCTableRow = ({
+const CMCTableRow: React.FC<CMCTableRowProps> = ({
   starNum,
   coinName,
   coinIcon,
   coinSymbol = '---',
-  price = '----',
-  hRate = '---',
-  dRate = '---',
+  price = 0,
+  hRate = 0,
+  dRate = 0,
   hRateIsIncrement,
   dRateIsIncrement,
-  marketCapValue = '---',
-  volumeValue = '---',
-  volumeCryptoValue = '---',
-  circulatingSupply = '---',
+  marketCapValue = 0,
+  volumeValue = 0,
+  volumeCryptoValue = 0,
+  circulatingSupply = 0,
 }) => {
   const graphImages = [
     'https://s3.coinmarketcap.com/generated/sparklines/web/7d/2781/52.svg',
@@ -45,26 +61,22 @@ const CMCTableRow = ({
     return graphImages[rndInt]
   }
 
-  // const router = useRouter()
-  
-  // const viewCoinDetails = () => {
-  //   router.push(
-  //     `/currencies/info?symbol=${coinSymbol}&coin=${coinName}&price=${price}`,
-  //     )
-  //   }
+  //const router = useRouter()
 
-  // const viewPrice = () => {
-  //   router.push(
-  //     `/currencies/price?symbol=${coinSymbol}&coin=${coinName}&price=${price}`,
-  //   )
-  // }
+  const viewCoinDetails = () => {
+    console.log(
+      `/currencies/info?symbol=${coinSymbol}&coin=${coinName}&price=${price}`,
+    )
+  }
+
+  const viewPrice = () => {
+    console.log(
+      `/currencies/price?symbol=${coinSymbol}&coin=${coinName}&price=${price}`,
+    )
+  }
 
   const formatNum = num => {
-    if (typeof num === 'number') {
-      return Number(num.toFixed(2)).toLocaleString();
-    } else {
-      return num;
-    }
+    return Number(num.toFixed(2)).toLocaleString()
   }
 
   return (
@@ -75,21 +87,15 @@ const CMCTableRow = ({
         </td>
         <td>{starNum}</td>
 
-        {coinIcon && coinIcon ? (
-          <td className='cursor-pointer'>
-            <CoinNameRow
-              name={coinName}
-              icon={coinIcon}
-              // clicked={viewCoinDetails}
-            />
-          </td>
-        ) : (
-          <></>
-        )}
-
         <td className='cursor-pointer'>
-        {/* onClick={viewPrice} */}
-        
+          <CoinNameRow
+            name={coinName}
+            icon={coinIcon}
+            //clicked={viewCoinDetails}
+          />
+        </td>
+
+        <td className='cursor-pointer' onClick={viewPrice}>
           <p>${formatNum(price)}</p>
         </td>
         <td>

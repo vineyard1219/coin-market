@@ -1,9 +1,18 @@
-import React from 'react'
+import React from 'react';
+import Image from "next/image";
 
-const CoinNameRow = () => {
-  return (
-    <div>CoinNameRow</div>
-  )
+interface CoinNameRowProps {
+  name: string;
+  icon: string;
 }
 
-export default CoinNameRow
+const CoinNameRow: React.FC<CoinNameRowProps> = ({ name, icon }) => {
+  return (
+    <div className="flex">
+      <Image src={icon} alt={name} width={20} height={20} />
+      <p>{name ||   undefined}</p>
+    </div>
+  );
+}
+
+export default CoinNameRow;
